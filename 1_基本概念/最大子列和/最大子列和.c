@@ -1,47 +1,47 @@
 int Max3( int A, int B, int C )
-{ /* è¿”å›3ä¸ªæ•´æ•°ä¸­çš„æœ€å¤§å€¼ */
+{ /* ·µ»Ø3¸öÕûÊıÖĞµÄ×î´óÖµ */
     return A > B ? A > C ? A : C : B > C ? B : C;
 }
  
 int DivideAndConquer( int List[], int left, int right )
-{ /* åˆ†æ²»æ³•æ±‚List[left]åˆ°List[right]çš„æœ€å¤§å­åˆ—å’Œ */
-    int MaxLeftSum, MaxRightSum; /* å­˜æ”¾å·¦å³å­é—®é¢˜çš„è§£ */
-    int MaxLeftBorderSum, MaxRightBorderSum; /*å­˜æ”¾è·¨åˆ†ç•Œçº¿çš„ç»“æœ*/
+{ /* ·ÖÖÎ·¨ÇóList[left]µ½List[right]µÄ×î´ó×ÓÁĞºÍ */
+    int MaxLeftSum, MaxRightSum; /* ´æ·Å×óÓÒ×ÓÎÊÌâµÄ½â */
+    int MaxLeftBorderSum, MaxRightBorderSum; /*´æ·Å¿ç·Ö½çÏßµÄ½á¹û*/
  
     int LeftBorderSum, RightBorderSum;
     int center, i;
  
-    if( left == right )  { /* é€’å½’çš„ç»ˆæ­¢æ¡ä»¶ï¼Œå­åˆ—åªæœ‰1ä¸ªæ•°å­— */
+    if( left == right )  { /* µİ¹éµÄÖÕÖ¹Ìõ¼ş£¬×ÓÁĞÖ»ÓĞ1¸öÊı×Ö */
         if( List[left] > 0 )  return List[left];
         else return 0;
     }
  
-    /* ä¸‹é¢æ˜¯"åˆ†"çš„è¿‡ç¨‹ */
-    center = ( left + right ) / 2; /* æ‰¾åˆ°ä¸­åˆ†ç‚¹ */
-    /* é€’å½’æ±‚å¾—ä¸¤è¾¹å­åˆ—çš„æœ€å¤§å’Œ */
+    /* ÏÂÃæÊÇ"·Ö"µÄ¹ı³Ì */
+    center = ( left + right ) / 2; /* ÕÒµ½ÖĞ·Öµã */
+    /* µİ¹éÇóµÃÁ½±ß×ÓÁĞµÄ×î´óºÍ */
     MaxLeftSum = DivideAndConquer( List, left, center );
     MaxRightSum = DivideAndConquer( List, center+1, right );
  
-    /* ä¸‹é¢æ±‚è·¨åˆ†ç•Œçº¿çš„æœ€å¤§å­åˆ—å’Œ */
+    /* ÏÂÃæÇó¿ç·Ö½çÏßµÄ×î´ó×ÓÁĞºÍ */
     MaxLeftBorderSum = 0; LeftBorderSum = 0;
-    for( i=center; i>=left; i-- ) { /* ä»ä¸­çº¿å‘å·¦æ‰«æ */
+    for( i=center; i>=left; i-- ) { /* ´ÓÖĞÏßÏò×óÉ¨Ãè */
         LeftBorderSum += List[i];
         if( LeftBorderSum > MaxLeftBorderSum )
             MaxLeftBorderSum = LeftBorderSum;
-    } /* å·¦è¾¹æ‰«æç»“æŸ */
+    } /* ×ó±ßÉ¨Ãè½áÊø */
  
     MaxRightBorderSum = 0; RightBorderSum = 0;
-    for( i=center+1; i<=right; i++ ) { /* ä»ä¸­çº¿å‘å³æ‰«æ */
+    for( i=center+1; i<=right; i++ ) { /* ´ÓÖĞÏßÏòÓÒÉ¨Ãè */
         RightBorderSum += List[i];
         if( RightBorderSum > MaxRightBorderSum )
             MaxRightBorderSum = RightBorderSum;
-    } /* å³è¾¹æ‰«æç»“æŸ */
+    } /* ÓÒ±ßÉ¨Ãè½áÊø */
  
-    /* ä¸‹é¢è¿”å›"æ²»"çš„ç»“æœ */
+    /* ÏÂÃæ·µ»Ø"ÖÎ"µÄ½á¹û */
     return Max3( MaxLeftSum, MaxRightSum, MaxLeftBorderSum + MaxRightBorderSum );
 }
  
 int MaxSubseqSum3( int List[], int N )
-{ /* ä¿æŒä¸å‰2ç§ç®—æ³•ç›¸åŒçš„å‡½æ•°æ¥å£ */
+{ /* ±£³ÖÓëÇ°2ÖÖËã·¨ÏàÍ¬µÄº¯Êı½Ó¿Ú */
     return DivideAndConquer( List, 0, N-1 );
 }
