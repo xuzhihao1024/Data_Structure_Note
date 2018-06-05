@@ -45,3 +45,23 @@ int MaxSubseqSum3( int List[], int N )
 { /* 保持与前2种算法相同的函数接口 */
     return DivideAndConquer( List, 0, N-1 );
 }
+int main (){
+	
+	int i,j;
+	int num,maxSum ;
+	//获取序列个数 
+	int k = 0 ;
+	scanf("%d",&k);
+	
+	//构造数组
+	int* nums = (int*)malloc( k * sizeof(int));
+	for(i=0 ;i<k ;i++){
+		scanf("%d",&num);
+		nums[i]=num;
+	}
+	
+	maxSum = MaxSubseqSum3(nums,k);
+	
+	printf("%d",maxSum);
+	return 0;
+} 
