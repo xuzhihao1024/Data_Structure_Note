@@ -1,8 +1,8 @@
 typedef int Position;
 struct QNode {
-    ElementType *Data;     /* å­˜å‚¨å…ƒç´ çš„æ•°ç»„ */
-    Position Front, Rear;  /* é˜Ÿåˆ—çš„å¤´ã€å°¾æŒ‡é’ˆ */
-    int MaxSize;           /* é˜Ÿåˆ—æœ€å¤§å®¹é‡ */
+    ElementType *Data;     /* ´æ´¢ÔªËØµÄÊı×é */
+    Position Front, Rear;  /* ¶ÓÁĞµÄÍ·¡¢Î²Ö¸Õë */
+    int MaxSize;           /* ¶ÓÁĞ×î´óÈİÁ¿ */
 };
 typedef struct QNode *Queue;
  
@@ -23,7 +23,7 @@ bool IsFull( Queue Q )
 bool AddQ( Queue Q, ElementType X )
 {
     if ( IsFull(Q) ) {
-        printf("é˜Ÿåˆ—æ»¡");
+        printf("¶ÓÁĞÂú");
         return false;
     }
     else {
@@ -41,7 +41,7 @@ bool IsEmpty( Queue Q )
 ElementType DeleteQ( Queue Q )
 {
     if ( IsEmpty(Q) ) { 
-        printf("é˜Ÿåˆ—ç©º");
+        printf("¶ÓÁĞ¿Õ");
         return ERROR;
     }
     else  {

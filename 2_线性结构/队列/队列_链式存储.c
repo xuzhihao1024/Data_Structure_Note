@@ -1,13 +1,13 @@
 typedef struct Node *PtrToNode;
-struct Node { /* é˜Ÿåˆ—ä¸­çš„ç»“ç‚¹ */
+struct Node { /* ¶ÓÁÐÖÐµÄ½áµã */
     ElementType Data;
     PtrToNode Next;
 };
 typedef PtrToNode Position;
  
 struct QNode {
-    Position Front, Rear;  /* é˜Ÿåˆ—çš„å¤´ã€å°¾æŒ‡é’ˆ */
-    int MaxSize;           /* é˜Ÿåˆ—æœ€å¤§å®¹é‡ */
+    Position Front, Rear;  /* ¶ÓÁÐµÄÍ·¡¢Î²Ö¸Õë */
+    int MaxSize;           /* ¶ÓÁÐ×î´óÈÝÁ¿ */
 };
 typedef struct QNode *Queue;
  
@@ -22,18 +22,18 @@ ElementType DeleteQ( Queue Q )
     ElementType FrontElem;
      
     if  ( IsEmpty(Q) ) {
-        printf("é˜Ÿåˆ—ç©º");
+        printf("¶ÓÁÐ¿Õ");
         return ERROR;
     }
     else {
         FrontCell = Q->Front;
-        if ( Q->Front == Q->Rear ) /* è‹¥é˜Ÿåˆ—åªæœ‰ä¸€ä¸ªå…ƒç´  */
-            Q->Front = Q->Rear = NULL; /* åˆ é™¤åŽé˜Ÿåˆ—ç½®ä¸ºç©º */
+        if ( Q->Front == Q->Rear ) /* Èô¶ÓÁÐÖ»ÓÐÒ»¸öÔªËØ */
+            Q->Front = Q->Rear = NULL; /* É¾³ýºó¶ÓÁÐÖÃÎª¿Õ */
         else                     
             Q->Front = Q->Front->Next;
         FrontElem = FrontCell->Data;
  
-        free( FrontCell );  /* é‡Šæ”¾è¢«åˆ é™¤ç»“ç‚¹ç©ºé—´  */
+        free( FrontCell );  /* ÊÍ·Å±»É¾³ý½áµã¿Õ¼ä  */
         return  FrontElem;
     }
 }
