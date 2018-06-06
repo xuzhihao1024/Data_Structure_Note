@@ -1,8 +1,8 @@
 typedef int Position;
 struct SNode {
-    ElementType *Data; /* å­˜å‚¨å…ƒç´ çš„æ•°ç»„ */
-    Position Top;      /* æ ˆé¡¶æŒ‡é’ˆ */
-    int MaxSize;       /* å †æ ˆæœ€å¤§å®¹é‡ */
+    ElementType *Data; /* ´æ´¢ÔªËØµÄÊý×é */
+    Position Top;      /* Õ»¶¥Ö¸Õë */
+    int MaxSize;       /* ¶ÑÕ»×î´óÈÝÁ¿ */
 };
 typedef struct SNode *Stack;
  
@@ -23,7 +23,7 @@ bool IsFull( Stack S )
 bool Push( Stack S, ElementType X )
 {
     if ( IsFull(S) ) {
-        printf("å †æ ˆæ»¡");
+        printf("¶ÑÕ»Âú");
         return false;
     }
     else {
@@ -40,8 +40,8 @@ bool IsEmpty( Stack S )
 ElementType Pop( Stack S )
 {
     if ( IsEmpty(S) ) {
-        printf("å †æ ˆç©º");
-        return ERROR; /* ERRORæ˜¯ElementTypeçš„ç‰¹æ®Šå€¼ï¼Œæ ‡å¿—é”™è¯¯ */
+        printf("¶ÑÕ»¿Õ");
+        return ERROR; /* ERRORÊÇElementTypeµÄÌØÊâÖµ£¬±êÖ¾´íÎó */
     }
     else 
         return ( S->Data[(S->Top)--] );
