@@ -1,20 +1,3 @@
-/*
-输入格式:
-输入分2行，每行分别先给出多项式非零项的个数，再以指数递降方式输入一个多项式非零项系数和指数（绝对值均为不超过1000的整数）。
-数字间以空格分隔。
-输入样例:
-4 3 4 -5 2  6 1  -2 0
-3 5 20  -7 4  3 1
-输出格式:
-输出分2行，分别以指数递降方式输出乘积多项式以及和多项式非零项的系数和指数。数字间以空格分隔，但结尾不能有多余空格。
-零多项式应输出0 0。
-输出样例:
-15 24 -25 22 30 21 -10 20 -21 8 35 6 -33 5 14 4 -15 3 18 2 -6 1
-5 20 -4 4 -5 2 9 1 -2 0
-coef : 系数
-expon : 指数
- 
-*/
 # define null 0
 typedef struct Polynode *Polynomial;
 struct Polynode{
@@ -71,6 +54,9 @@ void printPoly(Polynomial ps){
 Polynomial polySumFun(Polynomial t1, Polynomial t2){
 	//构造结果多项式链表头空节点
 	Polynomial rear,t,front,p1,p2;
+	if(!t1 && !t2){
+		return null;
+	}
 	rear = (Polynomial)malloc(sizeof(struct Polynode));
 	rear -> link = null; 
 	front = rear;
@@ -111,6 +97,9 @@ Polynomial polySumFun(Polynomial t1, Polynomial t2){
 
 /*多项式乘法运算*/
 Polynomial polyMultFun(Polynomial p1, Polynomial p2){
+	if(!p1 && !p2){
+		return null;
+	}
 	int c,e;
 	Polynomial ps,t,front,rear,t1,t2;
 	t1=p1; t2=p2;
@@ -126,8 +115,9 @@ Polynomial polyMultFun(Polynomial p1, Polynomial p2){
 		attach(c,e,&rear);
 		t2 = t2->link;
 	}
-	t1 = t1->link;
-	
+	if(t1->link){
+		t1 = t1->link;
+	}
 	while(t1){
 		t2 = p2; rear = ps;
 		while(t2){
@@ -167,7 +157,7 @@ Polynomial polyMultFun(Polynomial p1, Polynomial p2){
 
 Polynomial readPoly(){
 	int count, c, e;
-	Polynomial p,t,front,rear;
+	Polynomial t,front,rear;
 	
 	scanf("%d",&count);
 	//构造一个链表头空节点
@@ -176,6 +166,9 @@ Polynomial readPoly(){
 	//rear -> expon = 0;
 	rear ->link = null;
 	front = rear; 
+	if(!count){
+		return null;
+	} 
 	while(count){
 		scanf("%d %d",&c,&e);
 		attach(c,e, &rear);
@@ -189,12 +182,18 @@ Polynomial readPoly(){
 }
 
 void attach(int c,int e, Polynomial* pRear){
+	if(! *pRear){
+		return ;
+	}
 	//新构造一个节点,并拼接到链表后面去
 	Polynomial p;
 	p = (Polynomial)malloc(sizeof(struct Polynode));
 	p -> coef = c;
 	p -> expon = e;
 	p -> link = null;
+	if((*pRear) -> expon == e){
+		(*pRear) -> coef += c;
+	}
 	(*pRear) -> link = p;
 	*pRear = p; 
 }
